@@ -1,2 +1,2 @@
-# ucc
-☕ Unlimish C Compiler
+# ☕ ucc
+Unlimish C Compiler
