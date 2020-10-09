@@ -1,11 +1,11 @@
 CFLAGS=-std=c11 -g -static
 
-9cc: 9cc.c
+ucc: ucc.c
 
-test: 9cc
+test: ucc
 		./test.sh
 
 clean:
-		rm -f 9cc *.o *~ tmp*
+		rm -f ucc *.o *~ tmp*
 
 .PHONY: test clean
