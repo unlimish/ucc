@@ -124,32 +124,30 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 
-	char *p;
-	p = argv[1];
+	// Tokenize
+	token = tokenize(argv[1]);
+
+	// Output first part of assembly
+
 
 	printf(".intel_syntax noprefix\n");
 	printf(".globl main\n");
 	printf("main:\n");
-	printf("  mov rax, %ld\n", strtol(p, &p, 10));
 
-	while ((*p))
+	// Check the input starts from int then output first mov
+	printf("  mov rax, %d\n", expect_number());
+
+	// input '+ <num>' or '- <num>' then output mov
+	while (!at_eof())
 	{
-		if (*p == '+')
+		if (consume('+'))
 		{
-			p++;
-			printf("  add rax, %ld\n", strtol(p, &p, 10));
+			printf("  add rax, %d\n", expect_number());
 			continue;
 		}
 
-		if (*p == '-')
-		{
-			p++;
-			printf("  sub rax, %ld\n", strtol(p, &p, 10));
-			continue;
-		}
-
-		fprintf(stderr, "Undefined char: '%c'\n", *p);
-		return (1);
+		expect('-');
+		printf("  sub rax, %d\n", expect_number());
 	}
 
 	printf("  ret\n");
