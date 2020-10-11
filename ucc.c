@@ -19,6 +19,27 @@ void error_at(char *loc, char *fmt, ...) {
   exit(1);
 }
 
+// Node type of abstract syntax tree
+typedef enum
+{
+  ND_ADD, // +
+  ND_SUB, // -
+  ND_MUL, // *
+  ND_DIV, // /
+  ND_NUM, // int
+} NodeKind;
+
+typedef struct Node Node;
+
+struct Node
+{
+  NodeKind kind;  // Type of node
+  Node *lhs;      // Left side
+  Node *rhs;      // Right side
+  int val;        // use it if kind is ND_NUM
+};
+
+
 // Category token
 typedef enum {
   TK_RESERVED, // symbols
