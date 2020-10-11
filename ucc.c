@@ -70,7 +70,21 @@ Node *expr()
     else
       return (node);
   }
+}
 
+Node *mul()
+{
+  Node *node = primary();
+
+  for (;;)
+  {
+    if (consume('*'))
+      node = new_node(ND_MUL, node, primary());
+    else if (consume('/'))
+      node = new_node(ND_DIV, node, primary());
+    else
+      return (node);
+  }
 }
 
 // Category token
