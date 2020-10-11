@@ -19,6 +19,7 @@ void error_at(char *loc, char *fmt, ...) {
   exit(1);
 }
 
+
 // Node type of abstract syntax tree
 typedef enum
 {
@@ -54,6 +55,22 @@ Node *new_node_num(int val)
   node->kind = ND_NUM;
   node->val = val;
   return (node);
+}
+
+Node *expr()
+{
+  Node *node = mul();
+
+  for (;;)
+  {
+    if (consume('+'))
+      node = new_node(ND_ADD, node, mul());
+    else if (consume('-'))
+      node = new_node(ND_SUB, node, mul());
+    else
+      return (node);
+  }
+
 }
 
 // Category token
