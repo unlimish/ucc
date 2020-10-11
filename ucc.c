@@ -87,6 +87,18 @@ Node *mul()
   }
 }
 
+Node *primary()
+{
+  if (consume('('))
+  {
+    Node *node = expr;
+    expect(')');
+    return (node);
+  }
+
+  return new_node_num(expect_number());
+}
+
 // Category token
 typedef enum {
   TK_RESERVED, // symbols
